@@ -1795,6 +1795,13 @@
     "@primeuix/styled" "^0.7.0"
     "@primeuix/themes" "^1.2.1"
 
+"@primeuix/styled@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@primeuix/styled/-/styled-0.3.2.tgz#a6093e81a66fc78b915b5e8d998cc73c2c47a1dc"
+  integrity sha512-ColZes0+/WKqH4ob2x8DyNYf1NENpe5ZguOvx5yCLxaP8EIMVhLjWLO/3umJiDnQU4XXMLkn2mMHHw+fhTX/mw==
+  dependencies:
+    "@primeuix/utils" "^0.3.2"
+
 "@primeuix/styled@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@primeuix/styled/-/styled-0.7.0.tgz#9297bac3cb7487bf76ecd5363e48dfd857ab785e"
@@ -1802,19 +1809,17 @@
   dependencies:
     "@primeuix/utils" "^0.6.0"
 
-"@primeuix/styles@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@primeuix/styles/-/styles-1.2.1.tgz#d2cee0cfbdfbad52439b771a84731c3a0aa74e4e"
-  integrity sha512-Tri7pPgZgxrVmhJG8ijZZFolQ6vu27xnkGoAB9EFY8YlaKTM5iqkWzEcqdxy2KmgFWMXi+BrPHwO0RdQ6JCT+g==
-  dependencies:
-    "@primeuix/styled" "^0.7.0"
-
 "@primeuix/themes@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@primeuix/themes/-/themes-1.2.1.tgz#2d078b62dd5ad907f68e11f407908ee7ca62d473"
   integrity sha512-DVCFDncvag47tpag3TdufDTuvUbfKnkgzmlxAQkwuMS0IlPA3wChrf9VlL2wETg/ZpJm/tHobkJBnB9FmkiqnA==
   dependencies:
     "@primeuix/styled" "^0.7.0"
+
+"@primeuix/utils@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@primeuix/utils/-/utils-0.3.2.tgz#dbf92f6b5e18abe214f592a0b51bf4ca02a1f808"
+  integrity sha512-B+nphqTQeq+i6JuICLdVWnDMjONome2sNz0xI65qIOyeB4EF12CoKRiCsxuZ5uKAkHi/0d1LqlQ9mIWRSdkavw==
 
 "@primeuix/utils@^0.6.0":
   version "0.6.0"
@@ -5467,14 +5472,18 @@ postcss@^8.2.14, postcss@^8.4.23, postcss@^8.4.33, postcss@^8.4.43:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-primeng@20:
-  version "20.0.0"
-  resolved "https://registry.yarnpkg.com/primeng/-/primeng-20.0.0.tgz#69fc7df65fd53a5e7cfc22f043abd78f7faae3eb"
-  integrity sha512-F0r7tWqIGKInKSPxyVTXkj+XP/4mz78cWECHuu045JV0O1n7YMgi/2AuEAAqhgKOReLLkRBHB0pafEtH1tnYCQ==
+primeicons@7:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/primeicons/-/primeicons-7.0.0.tgz#6b25c3fdcb29bb745a3035bdc1ed5902f4a419cf"
+  integrity sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==
+
+primeng@18:
+  version "18.0.2"
+  resolved "https://registry.yarnpkg.com/primeng/-/primeng-18.0.2.tgz#39ef8d100042dde32c6fd0d8463271d260e178c3"
+  integrity sha512-Tt4KmbstxRmrUdxvVjV1j/1L3SnN8QdkPdC5hRHWQjOCheX71BA0aQ7aTJ4CXZZuw6wiDKlb7Jrm0aqTixE7+A==
   dependencies:
-    "@primeuix/styled" "^0.7.0"
-    "@primeuix/styles" "^1.2.1"
-    "@primeuix/utils" "^0.6.0"
+    "@primeuix/styled" "^0.3.2"
+    "@primeuix/utils" "^0.3.2"
     tslib "^2.3.0"
 
 proc-log@^4.0.0, proc-log@^4.1.0, proc-log@^4.2.0:
