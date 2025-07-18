@@ -1,0 +1,59 @@
+header {
+  width: 100%;
+  height: 7dvh;
+  border-bottom: 1px solid #b1b1b144;
+}
+
+main {
+  height: 93dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 20px;
+
+  .container-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .header-clientes {
+      display: flex;
+      width: 100%;
+      height: 30px;
+      align-items: center;
+      justify-content: space-between;
+
+      button {
+        font-size: 1rem;
+      }
+
+      ::ng-deep .p-button-label {
+        font-size: 0.9rem;
+      }
+    }
+
+    .table-container {
+      margin-top: 50px;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  @media (min-width: 600px) {
+    padding: 0px 40px;
+  }
+
+  @media (min-width: 900px) {
+    padding: 0px 100px;
+
+    .container-table {
+      .table-container {
+        height: 400px;
+      }
+    }
+  }
+
+  @media (min-width: 1200px) {
+    padding: 0px 300px;
+  }
+}

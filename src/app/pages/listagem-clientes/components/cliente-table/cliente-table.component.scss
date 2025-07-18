@@ -1,0 +1,20 @@
+tr, th {
+    font-size: 0.9rem;
+    height: 70px;
+}
+
+::ng-deep .tabela-com-borda .p-datatable-wrapper {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden; // necessário para cortar bordas internas
+}
+
+::ng-deep .tabela-com-borda table {
+  border-collapse: collapse;
+}
+
+::ng-deep .tabela-com-borda th,
+::ng-deep .tabela-com-borda td {
+  border: 1px solid #ccc;
+}
+
