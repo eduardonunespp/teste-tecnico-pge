@@ -1,1 +1,19 @@
-<p>modal works!</p>
+<p-dialog
+  [(visible)]="visible"
+  [modal]="modal"
+  [closable]="closable"
+  [style]="{ width: width }"
+  [header]="header"
+  (onHide)="onHide.emit()"
+  [draggable]="false"
+>
+  <body class="modal-body">
+    <ng-content></ng-content>
+  </body>
+
+  <div class="modal-footer">
+    <p-button label="Fechar" (onClick)="onHide.emit()" severity="danger" />
+
+    <p-button label="Salvar" (onClick)="onHide.emit()" severity="primary" />
+  </div>
+</p-dialog>

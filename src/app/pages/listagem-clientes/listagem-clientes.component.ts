@@ -3,11 +3,12 @@ import { ClienteFormComponent } from './components/cliente-form/cliente-form.com
 import { ButtonModule } from 'primeng/button';
 import { ClienteTableComponent } from './components/cliente-table/cliente-table.component';
 import { ICliente } from '../../shared';
+import { ModalComponent } from "../../shared/components/modal/modal.component";
 
 @Component({
   selector: 'app-listagem-clientes',
   standalone: true,
-  imports: [ClienteFormComponent, ButtonModule, ClienteTableComponent],
+  imports: [ClienteFormComponent, ButtonModule, ClienteTableComponent, ModalComponent],
   templateUrl: './listagem-clientes.component.html',
   styleUrl: './listagem-clientes.component.scss',
 })
@@ -86,4 +87,6 @@ export class ListagemClientesComponent {
       paisEstado: 'Brasil - RJ',
     },
   ];
+
+  showModal: boolean = false;
 }
