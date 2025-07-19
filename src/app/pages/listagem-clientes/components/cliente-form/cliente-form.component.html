@@ -1,35 +1,134 @@
-<form action="" class="form-full-width">
-  <p-floatlabel variant="on">
-    <input pInputText id="over_label" autocomplete="off" />
-    <label for="over_label">Nome</label>
-  </p-floatlabel>
-
-  <p-floatlabel variant="on">
-    <input pInputText id="over_label" autocomplete="off" />
-    <label for="over_label">Email</label>
-  </p-floatlabel>
-
-  <p-floatlabel variant="on">
-    <input pInputText id="over_label" autocomplete="off" />
-    <label for="over_label">CPF</label>
-  </p-floatlabel>
-
-  <p-floatlabel variant="on">
-    <input pInputText id="over_label" autocomplete="off" />
-    <label for="over_label">Data de Nascimento</label>
-  </p-floatlabel>
-
-  <p-floatlabel variant="on">
-    <input pInputText id="over_label" autocomplete="off" />
-    <label for="over_label">Contato</label>
-  </p-floatlabel>
-
+<form [formGroup]="form" (ngSubmit)="submit()" class="p-fluid">
   <div class="grid">
-    <div class="col-6">
-      <input pInputText placeholder="Pais" class="w-full" />
+    <div class="col-12 md:col-6 mt-2">
+      <p-floatlabel>
+        <input
+          pInputText
+          id="nome"
+          formControlName="nome"
+          autocomplete="off"
+          class="w-full"
+        />
+        <label for="nome">Nome</label>
+      </p-floatlabel>
+      <small *ngIf="f.nome.touched && f.nome.invalid" class="p-error">
+        Nome é obrigatório e deve ter no mínimo 3 caracteres.
+      </small>
     </div>
-    <div class="col-6">
-      <input pInputText placeholder="Estado" class="w-full" />
+
+    <div class="col-12 md:col-6 mt-2">
+      <p-floatlabel>
+        <input
+          pInputText
+          id="email"
+          formControlName="email"
+          autocomplete="off"
+          class="w-full"
+        />
+        <label for="email">Email</label>
+      </p-floatlabel>
+      <small
+        *ngIf="f.email.invalid && (f.email.touched || f.nome.dirty)"
+        class="p-error"
+      >
+        Email inválido.
+      </small>
     </div>
+
+    <div class="col-12 md:col-6 mt-2">
+      <p-dropdown
+        [options]="paises"
+        formControlName="pais"
+        placeholder="País"
+        class="w-full"
+      ></p-dropdown>
+    </div>
+
+    <div class="col-12 md:col-6 mt-2">
+      <p-dropdown
+        [options]="estados"
+        formControlName="estado"
+        placeholder="Estado"
+        class="w-full"
+        [disabled]="!estados.length"
+      ></p-dropdown>
+    </div>
+
+    <div class="col-12 md:col-6 mt-4">
+      <p-floatlabel>
+        <input
+          pInputText
+          id="cpf"
+          formControlName="cpf"
+          autocomplete="off"
+          mask="000.000.000-00"
+          class="w-full"
+        />
+        <label for="cpf">CPF</label>
+      </p-floatlabel>
+      <small
+        *ngIf="f.cpf.invalid && (f.cpf.touched || f.cpf.dirty)"
+        class="p-error"
+      >
+        CPF inválido.
+      </small>
+    </div>
+
+    <div class="col-12 md:col-6">
+      <label for="username">Data de Nascimento</label>
+      <input
+        type="date"
+        pInputText
+        id="dataNascimento"
+        formControlName="dataNascimento"
+        class="w-full"
+        [max]="maxDate"
+      />
+      <small
+        *ngIf="f['dataNascimento'].errors?.['required'] && (f['dataNascimento'].touched || f['dataNascimento'].dirty)"
+        class="p-error"
+      >
+        Data de nascimento é obrigatória.
+      </small>
+
+      <small
+        *ngIf="f['dataNascimento'].errors?.['dataFutura'] && (f['dataNascimento'].touched || f['dataNascimento'].dirty)"
+        class="p-error"
+      >
+        A data não pode ser no futuro.
+      </small>
+    </div>
+
+    <div class="col-12 md:col-6 mt-2">
+      <p-dropdown
+        [options]="tiposContato"
+        appendTo="body"
+        formControlName="tipoContato"
+        placeholder="Tipo de Contato"
+        class="w-full"
+      ></p-dropdown>
+    </div>
+
+    <div class="col-12 md:col-6 mt-2">
+      <p-floatlabel>
+        <input
+          pInputText
+          id="contato"
+          formControlName="contato"
+          autocomplete="off"
+          class="w-full"
+          [mask]="
+            f['tipoContato'].value === 'Whatsapp'
+              ? '(00) 00000-0000'
+              : '(00) 0000-0000'
+          "
+        />
+        <label for="contato">Contato</label>
+      </p-floatlabel>
+    </div>
+  </div>
+
+  <div class="footer-form">
+    <p-button label="Salvar" />
   </div>
 </form>

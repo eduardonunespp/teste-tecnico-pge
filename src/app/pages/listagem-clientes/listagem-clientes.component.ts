@@ -3,16 +3,28 @@ import { ClienteFormComponent } from './components/cliente-form/cliente-form.com
 import { ButtonModule } from 'primeng/button';
 import { ClienteTableComponent } from './components/cliente-table/cliente-table.component';
 import { ICliente } from '../../shared';
-import { ModalComponent } from "../../shared/components/modal/modal.component";
+import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { Router } from '@angular/router';
+import { DescriptionHeaderPageComponent } from '../../shared/components/description-header-page/description-header-page.component';
 
 @Component({
   selector: 'app-listagem-clientes',
   standalone: true,
-  imports: [ClienteFormComponent, ButtonModule, ClienteTableComponent, ModalComponent],
+  imports: [
+    SidebarModule,
+    DescriptionHeaderPageComponent,
+    ButtonModule,
+    ClienteTableComponent,
+
+    DescriptionHeaderPageComponent,
+  ],
   templateUrl: './listagem-clientes.component.html',
   styleUrl: './listagem-clientes.component.scss',
 })
 export class ListagemClientesComponent {
+  constructor(private router: Router) {}
+
   clientes: ICliente[] = [
     {
       nome: 'João Silva',
@@ -89,4 +101,11 @@ export class ListagemClientesComponent {
   ];
 
   showModal: boolean = false;
+
+  visibleSidebar: boolean = false;
+
+  redirectTo() {
+    this.router.navigate(['/cadastro-cliente']);
+    this.visibleSidebar = false;
+  }
 }

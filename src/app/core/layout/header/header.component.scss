@@ -1,0 +1,34 @@
+header {
+  width: 100%;
+  height: 7dvh;
+  border-bottom: 1px solid #b1b1b144;
+
+  padding: 0px 40px;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--brand);
+      transition: color 0.3s ease-in-out;
+    }
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .container-menu {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  span:hover {
+    cursor: pointer;
+    color: var(--brand);
+    transition: color 0.3s ease-in-out;
+  }
+}

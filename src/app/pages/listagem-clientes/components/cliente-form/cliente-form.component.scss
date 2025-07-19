@@ -12,3 +12,28 @@
     }
   }
 }
+
+.footer-form {
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+p-button {
+  width: 100%;
+  display: block;
+
+  @media (min-width: 600px) {
+    width: 100px;
+  }
+}
+
+.footer-form ::ng-deep .p-button {
+  width: 100%;
+}
+
+small {
+  color: rgb(255, 68, 0);
+}

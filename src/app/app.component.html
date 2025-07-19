@@ -1,1 +1,24 @@
+<app-header (toggle)="visibleSidebar = true" />
+
 <router-outlet />
+
+<p-sidebar [(visible)]="visibleSidebar" position="left" [baseZIndex]="10000">
+  <div class="container-sidebar">
+     <button
+    pButton
+    type="button"
+    (click)="toPage('')"
+    label="Listagem de Clientes"
+    class="w-full"
+  ></button>
+   <button
+    pButton
+    type="button"
+    (click)="toPage('cadastro-cliente')"
+    label="Cadastro de Clientes"
+    class="w-full mt-4"
+  ></button>
+  </div>
+ 
+</p-sidebar>
+

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+@import "primeicons/primeicons.css";
 
 * {
   box-sizing: border-box;
@@ -45,4 +46,13 @@ body {
   background-color: var(--terciary);
   --webkit-font-smoothing: antialisse;
   font-family: var(--font-primary);
+}
+
+::ng-deep .p-dropdown-panel {
+  z-index: 9999 !important;
+}
+
+::ng-deep .p-dialog {
+  z-index: 9000 !important;
+  overflow: visible !important;
 }

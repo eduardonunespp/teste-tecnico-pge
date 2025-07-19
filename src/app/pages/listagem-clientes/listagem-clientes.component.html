@@ -1,23 +1,12 @@
-<header></header>
 <main>
   <div class="container-table">
-    <div class="header-clientes">
-      <h2>Clientes</h2>
-
-      <p-button label="Adicionar Novo Cliente" (onClick)="showModal = true" />
-    </div>
+    <app-description-header-page 
+      title="Listagem de Clientes"
+      redirect="/cadastro-cliente"
+      buttonName="Adicionar Novo Cliente" />
 
     <div class="table-container">
       <app-cliente-table [clientes]="clientes" />
     </div>
   </div>
-
-  <app-modal
-    [visible]="showModal"
-    header="Adicionar Cliente"
-    width="40vw"
-    (onHide)="showModal = false"
-  >
-  <app-cliente-form />
-  </app-modal>
 </main>
