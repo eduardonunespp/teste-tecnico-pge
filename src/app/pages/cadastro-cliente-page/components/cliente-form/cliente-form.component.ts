@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabel, FloatLabelModule } from 'primeng/floatlabel';
 import { DropdownModule } from 'primeng/dropdown';
@@ -9,7 +15,11 @@ import { format } from 'date-fns';
 import { CommonModule } from '@angular/common';
 import { IClienteForm } from '../../../../shared';
 import { dataFuturaValidator } from '../../../../core';
-import { Button, ButtonModule } from "primeng/button";
+import { Button, ButtonModule } from 'primeng/button';
+import { ClienteService } from '../../../../core/services/cliente.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { LogService } from '../../../../core/services/log.service';
 
 @Component({
   selector: 'app-cliente-form',
@@ -25,9 +35,10 @@ import { Button, ButtonModule } from "primeng/button";
     NgxMaskDirective,
     ReactiveFormsModule,
     CommonModule,
-    Button
-],
-  providers: [provideNgxMask()],
+    Button,
+    ToastModule,
+  ],
+  providers: [provideNgxMask(), MessageService],
   templateUrl: './cliente-form.component.html',
   styleUrl: './cliente-form.component.scss',
 })
@@ -37,14 +48,31 @@ export class ClienteFormComponent {
   estados: string[] = [];
 
   estadosPorPais: Record<string, string[]> = {
-    'Brasil': ['SP', 'RJ', 'MG', 'CE', 'SP', 'RJ', 'MG', 'CE', 'SP', 'RJ', 'MG', 'CE'],
-    'Estados Unidos': ['California', 'Texas', 'Florida']
+    Brasil: [
+      'SP',
+      'RJ',
+      'MG',
+      'CE',
+      'SP',
+      'RJ',
+      'MG',
+      'CE',
+      'SP',
+      'RJ',
+      'MG',
+      'CE',
+    ],
+    'Estados Unidos': ['California', 'Texas', 'Florida'],
   };
 
   tiposContato = ['Residencial', 'Fixo', 'Whatsapp'];
 
-
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private clienteService: ClienteService,
+    private messageService: MessageService,
+    private logService: LogService
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -55,24 +83,44 @@ export class ClienteFormComponent {
       contato: ['', [Validators.required]],
       tipoContato: ['', Validators.required],
       pais: ['', Validators.required],
-      estado: ['', Validators.required]
+      estado: ['', Validators.required],
     });
 
-    this.form.get('pais')?.valueChanges.subscribe(pais => {
+    this.form.get('pais')?.valueChanges.subscribe((pais) => {
       this.estados = this.estadosPorPais[pais] || [];
       this.form.get('estado')?.reset();
     });
   }
 
-   maxDate: string = format(new Date(), 'yyyy-MM-dd');
+  maxDate: string = format(new Date(), 'yyyy-MM-dd');
 
   submit() {
     if (this.form.invalid) {
+      this.logService.logWarn('Formulário inválido no submit', this.form.value);
       this.form.markAllAsTouched();
       return;
     }
 
-    console.log(this.form.value);
+    this.clienteService.criar(this.form.value).subscribe({
+      next: (clienteCriado) => {
+        console.log('aaaaaaaaaaaa')
+        this.logService.logInfo('Cliente criado com sucesso', clienteCriado);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: 'Cliente salvo com sucesso!',
+        });
+        this.form.reset();
+      },
+      error: (error) => {
+        this.logService.logError('Erro ao criar cliente', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: 'Falha ao salvar cliente.',
+        });
+      },
+    });
   }
 
   isFuturo(data: Date): boolean {

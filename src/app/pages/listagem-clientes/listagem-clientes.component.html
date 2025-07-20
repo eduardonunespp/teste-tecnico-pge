@@ -6,7 +6,7 @@
       buttonName="Adicionar Novo Cliente" />
 
     <div class="table-container">
-      <app-cliente-table [clientes]="clientes" />
+      <app-cliente-table [clientes]="(clientes$ | async) || []"></app-cliente-table>
     </div>
   </div>
 </main>

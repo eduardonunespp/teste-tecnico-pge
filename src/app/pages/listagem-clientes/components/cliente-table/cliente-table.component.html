@@ -1,17 +1,20 @@
-<p-table 
- styleClass="tabela-com-borda"
-  [value]="clientes" stripedRows 
-    [paginator]="true"
-    [rows]="5"
-    [tableStyle]="{ 'min-width': '50rem' }"
-    [rowsPerPageOptions]="[5, 10, 20]"
-  [tableStyle]="{ 'min-width': '50rem' }">
+<p-table
+  styleClass="tabela-com-borda"
+  [value]="clientes"
+  stripedRows
+  [paginator]="true"
+  [rows]="5"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  [rowsPerPageOptions]="[5, 10, 20]"
+  [tableStyle]="{ 'min-width': '50rem' }"
+>
   <ng-template #header>
     <tr>
       <th>Nome</th>
       <th>Email</th>
       <th>CPF</th>
       <th>Data de Nascimento</th>
+      <th>Tipo de Contato</th>
       <th>Contato</th>
       <th>Pais/Estado</th>
     </tr>
@@ -22,6 +25,7 @@
       <td>{{ cliente.email }}</td>
       <td>{{ cliente.cpf }}</td>
       <td>{{ cliente.dataNascimento }}</td>
+      <td>{{ cliente.tipoContato }}</td>
       <td>{{ cliente.contato }}</td>
       <td>{{ cliente.pais }}/{{ cliente.estado }}</td>
     </tr>
