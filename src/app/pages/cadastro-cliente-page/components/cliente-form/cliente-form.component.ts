@@ -56,6 +56,7 @@ export class ClienteFormComponent implements OnInit, OnChanges {
   @Input() idCliente?: number;
   @Output() onCloseModal = new EventEmitter<void>();
   @Output() onRefreshClients = new EventEmitter<void>();
+  @Output() onEditSuccess = new EventEmitter<void>();
   form!: FormGroup;
   paises = ['Brasil', 'Estados Unidos'];
   estados: string[] = [];
@@ -89,14 +90,14 @@ export class ClienteFormComponent implements OnInit, OnChanges {
 
   private formatarData(data: string): string {
     const date = new Date(data);
-    return date.toISOString().substring(0, 10); // Formato 'yyyy-MM-dd'
+    return date.toISOString().substring(0, 10);
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      cpf: ['', [Validators.required]],
+      cpf: [''],
       dataNascimento: ['', [Validators.required, dataFuturaValidator]],
       contato: ['', [Validators.required]],
       tipoContato: ['', Validators.required],
@@ -107,6 +108,14 @@ export class ClienteFormComponent implements OnInit, OnChanges {
     this.form.get('pais')?.valueChanges.subscribe((pais) => {
       this.estados = this.estadosPorPais[pais] || [];
       this.form.get('estado')?.reset();
+
+      const cpfControl = this.form.get('cpf');
+      if (pais === 'Brasil') {
+        cpfControl?.setValidators([Validators.required]);
+      } else {
+        cpfControl?.clearValidators();
+      }
+      cpfControl?.updateValueAndValidity();
     });
   }
 
@@ -150,14 +159,10 @@ export class ClienteFormComponent implements OnInit, OnChanges {
             'Cliente atualizado com sucesso',
             clienteAtualizado
           );
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Sucesso',
-            detail: 'Cliente atualizado com sucesso!',
-          });
 
           this.onCloseModal.emit();
           this.onRefreshClients.emit();
+          this.onEditSuccess.emit();
         },
         error: (error) => {
           this.logService.logError('Erro ao atualizar cliente', error);

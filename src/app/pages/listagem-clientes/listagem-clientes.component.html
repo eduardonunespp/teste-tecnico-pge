@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <main>
   <div class="container-table">
     <app-description-header-page
@@ -82,6 +84,7 @@
       [IsEdit]="true"
       (onCloseModal)="visibleModal = false"
       (onRefreshClients)="getFromCache()"
+      (onEditSuccess)="onEditSuccess()"
     />
   </app-modal>
 </main>

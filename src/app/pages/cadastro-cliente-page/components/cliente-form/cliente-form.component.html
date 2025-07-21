@@ -69,11 +69,11 @@
         <label for="cpf">CPF</label>
       </p-floatlabel>
       <small
-        *ngIf="f.cpf.invalid && (f.cpf.touched || f.cpf.dirty)"
-        class="p-error"
-      >
-        CPF inválido.
-      </small>
+  *ngIf="f.cpf.hasError('required') && (f.cpf.touched || f.cpf.dirty)"
+  class="p-error"
+>
+  CPF é obrigatório para residentes no Brasil.
+</small>
     </div>
 
     <div class="col-12 md:col-6">

@@ -10,13 +10,14 @@ import { DescriptionHeaderPageComponent } from '../../shared/components/descript
 import { BehaviorSubject, debounceTime, Observable } from 'rxjs';
 import { ClienteService } from '../../core/services/cliente.service';
 import { CommonModule } from '@angular/common';
-import * as Cache from '../../core/adapters/cache'; // ajuste conforme a estrutura
+import * as Cache from '../../core/adapters/cache';
 import { FloatLabel, FloatLabelModule } from 'primeng/floatlabel';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { PopupComponent } from '../../shared/components/popup/popup.component';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-listagem-clientes',
@@ -38,8 +39,9 @@ import { ConfirmationService } from 'primeng/api';
     NgxMaskDirective,
     ModalComponent,
     ClienteFormComponent,
+    ToastModule,
   ],
-  providers: [provideNgxMask(), ConfirmationService],
+  providers: [provideNgxMask(), ConfirmationService, MessageService],
   templateUrl: './listagem-clientes.component.html',
   styleUrl: './listagem-clientes.component.scss',
 })
@@ -53,7 +55,8 @@ export class ListagemClientesComponent implements OnInit {
   constructor(
     private router: Router,
     private clienteService: ClienteService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -109,6 +112,14 @@ export class ListagemClientesComponent implements OnInit {
     form.reset();
     Cache.remove({ key: 'filtrosClientes' });
     return this.buscarFiltro();
+  }
+
+  onEditSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Sucesso',
+      detail: 'Cliente atualizado com sucesso!',
+    });
   }
 
   deletarCliente(id: number) {
