@@ -55,7 +55,7 @@
     <div class="table-container">
       <app-cliente-table
         [clientes]="(clientesSubject | async) || []"
-        (openModalEdit)="popup.exibir()"
+        (openModalEdit)="openModalEdit($event)"
         (openModalDelete)="popup.exibir($event)"
       ></app-cliente-table>
     </div>
@@ -68,4 +68,20 @@
     (cancelar)="cancelou()"
     #popup
   ></app-popup>
+
+  <app-modal
+    [visible]="visibleModal"
+    [modal]="true"
+    [closable]="true"
+    [width]="'50rem'"
+    [header]="'Editar Cliente'"
+    (onHide)="visibleModal = false"
+  >
+    <app-cliente-form
+      [idCliente]="idCliente"
+      [IsEdit]="true"
+      (onCloseModal)="visibleModal = false"
+      (onRefreshClients)="getFromCache()"
+    />
+  </app-modal>
 </main>

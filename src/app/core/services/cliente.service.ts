@@ -33,6 +33,23 @@ export class ClienteService {
     return Cache.get<ICliente[]>({ key: this.storageKey }) || [];
   }
 
+  buscarPorId(id: number): Observable<ICliente | undefined> {
+  const cached = Cache.get<ICliente[]>({ key: this.storageKey });
+
+  if (cached) {
+    const cliente = cached.find((c) => c.id === id);
+    return of(cliente).pipe(delay(100));
+  }
+
+  return this.http.get<ICliente>(`${this.baseUrl}/${id}`).pipe(
+    tap((cliente) => {
+      const lista = Cache.get<ICliente[]>({ key: this.storageKey }) || [];
+      const atualizada = [...lista.filter(c => c.id !== id), cliente];
+      Cache.set({ key: this.storageKey, value: atualizada });
+    })
+  );
+}
+
   criar(cliente: ICliente): Observable<ICliente> {
     return this.http.post<ICliente>(this.baseUrl, cliente).pipe(
       tap((novoCliente) => {
@@ -44,15 +61,17 @@ export class ClienteService {
   }
 
   atualizar(id: number, cliente: ICliente): Observable<ICliente> {
-    return this.http.put<ICliente>(`${this.baseUrl}/${id}`, cliente).pipe(
-      tap((atualizado) => {
-        const lista = Cache.get<ICliente[]>({ key: this.storageKey }) || [];
+  return this.http.put<ICliente>(`${this.baseUrl}/${id}`, cliente).pipe(
+    tap((atualizado) => {
+      // Corrige se a API não retornar o ID
+      const clienteComId = { ...atualizado, id };
 
-        const novaLista = lista.map((c) => (c.id === id ? atualizado : c));
-        Cache.set({ key: this.storageKey, value: novaLista });
-      })
-    );
-  }
+      const lista = Cache.get<ICliente[]>({ key: this.storageKey }) || [];
+      const novaLista = lista.map((c) => (c.id === id ? clienteComId : c));
+      Cache.set({ key: this.storageKey, value: novaLista });
+    })
+  );
+}
 
   deletar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`).pipe(

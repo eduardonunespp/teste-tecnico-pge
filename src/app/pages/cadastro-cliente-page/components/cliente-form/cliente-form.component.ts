@@ -1,4 +1,12 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -22,7 +30,6 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { LogService } from '../../../../core/services/log.service';
 
-
 @Component({
   selector: 'app-cliente-form',
   standalone: true,
@@ -44,7 +51,11 @@ import { LogService } from '../../../../core/services/log.service';
   templateUrl: './cliente-form.component.html',
   styleUrl: './cliente-form.component.scss',
 })
-export class ClienteFormComponent {
+export class ClienteFormComponent implements OnInit, OnChanges {
+  @Input() IsEdit: boolean = false;
+  @Input() idCliente?: number;
+  @Output() onCloseModal = new EventEmitter<void>();
+  @Output() onRefreshClients = new EventEmitter<void>();
   form!: FormGroup;
   paises = ['Brasil', 'Estados Unidos'];
   estados: string[] = [];
@@ -76,6 +87,11 @@ export class ClienteFormComponent {
     private logService: LogService
   ) {}
 
+  private formatarData(data: string): string {
+    const date = new Date(data);
+    return date.toISOString().substring(0, 10); // Formato 'yyyy-MM-dd'
+  }
+
   ngOnInit(): void {
     this.form = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
@@ -94,6 +110,27 @@ export class ClienteFormComponent {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Changes detected:', this.idCliente);
+
+    this.form.get('pais')?.valueChanges.subscribe((pais) => {
+      this.estados = this.estadosPorPais[pais] || [];
+      this.form.get('estado')?.reset();
+    });
+
+    if (this.idCliente) {
+      this.clienteService.buscarPorId(this.idCliente).subscribe((cliente) => {
+        if (cliente) {
+          this.estados = this.estadosPorPais[cliente.pais] || [];
+          this.form.patchValue({
+            ...cliente,
+            dataNascimento: this.formatarData(cliente.dataNascimento),
+          });
+        }
+      });
+    }
+  }
+
   maxDate: string = format(new Date(), 'yyyy-MM-dd');
 
   submit() {
@@ -103,25 +140,56 @@ export class ClienteFormComponent {
       return;
     }
 
-    this.clienteService.criar(this.form.value).subscribe({
-      next: (clienteCriado) => {
-        this.logService.logInfo('Cliente criado com sucesso', clienteCriado);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Sucesso',
-          detail: 'Cliente salvo com sucesso!',
-        });
-        this.form.reset();
-      },
-      error: (error) => {
-        this.logService.logError('Erro ao criar cliente', error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro',
-          detail: 'Falha ao salvar cliente.',
-        });
-      },
-    });
+    const cliente = this.form.value;
+
+    if (this.idCliente) {
+      // Atualização
+      this.clienteService.atualizar(this.idCliente, cliente).subscribe({
+        next: (clienteAtualizado) => {
+          this.logService.logInfo(
+            'Cliente atualizado com sucesso',
+            clienteAtualizado
+          );
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sucesso',
+            detail: 'Cliente atualizado com sucesso!',
+          });
+
+          this.onCloseModal.emit();
+          this.onRefreshClients.emit();
+        },
+        error: (error) => {
+          this.logService.logError('Erro ao atualizar cliente', error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: 'Falha ao atualizar cliente.',
+          });
+        },
+      });
+    } else {
+      // Criação
+      this.clienteService.criar(cliente).subscribe({
+        next: (clienteCriado) => {
+          this.logService.logInfo('Cliente criado com sucesso', clienteCriado);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sucesso',
+            detail: 'Cliente salvo com sucesso!',
+          });
+          this.form.reset();
+        },
+        error: (error) => {
+          this.logService.logError('Erro ao criar cliente', error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: 'Falha ao salvar cliente.',
+          });
+        },
+      });
+    }
   }
 
   isFuturo(data: Date): boolean {

@@ -16,5 +16,5 @@ export class ClienteTableComponent {
 
   @Output() openModalDelete = new EventEmitter<number>(); // envia o ID
 
-  @Output() openModalEdit = new EventEmitter<ICliente>();
+  @Output() openModalEdit = new EventEmitter<number>();
 }

@@ -36,6 +36,8 @@ import { ConfirmationService } from 'primeng/api';
     CommonModule,
     ReactiveFormsModule,
     NgxMaskDirective,
+    ModalComponent,
+    ClienteFormComponent,
   ],
   providers: [provideNgxMask(), ConfirmationService],
   templateUrl: './listagem-clientes.component.html',
@@ -43,10 +45,10 @@ import { ConfirmationService } from 'primeng/api';
 })
 export class ListagemClientesComponent implements OnInit {
   form!: FormGroup;
-
   clientes: ICliente[] = [];
-
   clientesSubject = new BehaviorSubject<ICliente[]>([]);
+  visibleModal: boolean = false;
+  idCliente: number | undefined;
 
   constructor(
     private router: Router,
@@ -55,7 +57,7 @@ export class ListagemClientesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.clientes = this.clienteService.listarDoCache();
+    this.getFromCache();
 
     this.form = this.fb.group({
       nome: [''],
@@ -73,6 +75,14 @@ export class ListagemClientesComponent implements OnInit {
     } else {
       this.clientesSubject.next(this.clientes);
     }
+  }
+
+  getFromCache(): void {
+    this.clientes = this.clienteService.listarDoCache();
+
+    const filtro = this.form?.value || {}; // Pega filtros atuais (ou vazio)
+    const filtrados = this.filtrarClientes(this.clientes, filtro);
+    this.clientesSubject.next(filtrados);
   }
 
   buscarFiltro(): void {
@@ -102,13 +112,13 @@ export class ListagemClientesComponent implements OnInit {
   }
 
   deletarCliente(id: number) {
-  this.clienteService.deletar(id).subscribe(() => {
-    const novaLista = this.clienteService.listarDoCache();
-    const filtros = this.form.value;
-    const filtrados = this.filtrarClientes(novaLista, filtros);
-    this.clientesSubject.next(filtrados);
-  });
-}
+    this.clienteService.deletar(id).subscribe(() => {
+      const novaLista = this.clienteService.listarDoCache();
+      const filtros = this.form.value;
+      const filtrados = this.filtrarClientes(novaLista, filtros);
+      this.clientesSubject.next(filtrados);
+    });
+  }
 
   cancelou() {
     console.log('Cancelado');
@@ -117,6 +127,15 @@ export class ListagemClientesComponent implements OnInit {
   showModal: boolean = false;
 
   visibleSidebar: boolean = false;
+
+  openModalEdit(idCliente: number) {
+    console.log('Abrindo modal de edição para o cliente com ID:');
+
+    this.visibleModal = true;
+    this.idCliente = idCliente;
+
+    console.log('ID do cliente a ser editado:', idCliente);
+  }
 
   redirectTo() {
     this.router.navigate(['/cadastro-cliente']);
