@@ -12,20 +12,18 @@ import { ClienteService } from '../../core/services/cliente.service';
 import { CommonModule } from '@angular/common';
 import * as Cache from '../../core/adapters/cache'; // ajuste conforme a estrutura
 import { FloatLabel, FloatLabelModule } from 'primeng/floatlabel';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { PopupComponent } from '../../shared/components/popup/popup.component';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-listagem-clientes',
   standalone: true,
   imports: [
     SidebarModule,
+    PopupComponent,
     DescriptionHeaderPageComponent,
     ButtonModule,
     ClienteTableComponent,
@@ -39,7 +37,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     ReactiveFormsModule,
     NgxMaskDirective,
   ],
-  providers: [provideNgxMask()],
+  providers: [provideNgxMask(), ConfirmationService],
   templateUrl: './listagem-clientes.component.html',
   styleUrl: './listagem-clientes.component.scss',
 })
@@ -101,6 +99,19 @@ export class ListagemClientesComponent implements OnInit {
     form.reset();
     Cache.remove({ key: 'filtrosClientes' });
     return this.buscarFiltro();
+  }
+
+  deletarCliente(id: number) {
+  this.clienteService.deletar(id).subscribe(() => {
+    const novaLista = this.clienteService.listarDoCache();
+    const filtros = this.form.value;
+    const filtrados = this.filtrarClientes(novaLista, filtros);
+    this.clientesSubject.next(filtrados);
+  });
+}
+
+  cancelou() {
+    console.log('Cancelado');
   }
 
   showModal: boolean = false;

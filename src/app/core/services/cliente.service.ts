@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ICliente } from '../../shared';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import * as Cache from '../../core/adapters/cache'; // ajuste conforme a estrutura
-import { delay } from 'rxjs/operators'; // para simular tempo de rede opcionalmente
+import { delay } from 'rxjs/operators';
+import * as Cache from '../../core/adapters/cache';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class ClienteService {
     const cached = Cache.get<ICliente[]>({ key: this.storageKey });
 
     if (cached) {
-      return of(cached).pipe(delay(200)); // remove `delay` se não quiser simulação
+      return of(cached).pipe(delay(200));
     }
 
     return this.http.get<ICliente[]>(this.baseUrl).pipe(
@@ -30,8 +30,8 @@ export class ClienteService {
   }
 
   listarDoCache(): ICliente[] {
-  return Cache.get<ICliente[]>({ key: this.storageKey }) || [];
-}
+    return Cache.get<ICliente[]>({ key: this.storageKey }) || [];
+  }
 
   criar(cliente: ICliente): Observable<ICliente> {
     return this.http.post<ICliente>(this.baseUrl, cliente).pipe(

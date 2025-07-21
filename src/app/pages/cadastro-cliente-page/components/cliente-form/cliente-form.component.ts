@@ -105,7 +105,6 @@ export class ClienteFormComponent {
 
     this.clienteService.criar(this.form.value).subscribe({
       next: (clienteCriado) => {
-        console.log('aaaaaaaaaaaa')
         this.logService.logInfo('Cliente criado com sucesso', clienteCriado);
         this.messageService.add({
           severity: 'success',

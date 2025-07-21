@@ -39,18 +39,15 @@
             icon="pi pi-search"
             label="Buscar"
             iconPos="left"
-           
           ></p-button>
-          
         </div>
-         <div class="col-12 md:col-2 mt-2">
+        <div class="col-12 md:col-2 mt-2">
           <p-button
             (onClick)="limparFiltro()"
             icon="pi pi-times"
             label="Limpar Filtros"
             iconPos="left"
           ></p-button>
-          
         </div>
       </div>
     </form>
@@ -58,7 +55,17 @@
     <div class="table-container">
       <app-cliente-table
         [clientes]="(clientesSubject | async) || []"
+        (openModalEdit)="popup.exibir()"
+        (openModalDelete)="popup.exibir($event)"
       ></app-cliente-table>
     </div>
   </div>
+
+  <app-popup
+    [titulo]="'Excluir Cliente'"
+    [mensagem]="'Deseja realmente excluir este cliente?'"
+    (confirmar)="deletarCliente($event)"
+    (cancelar)="cancelou()"
+    #popup
+  ></app-popup>
 </main>
