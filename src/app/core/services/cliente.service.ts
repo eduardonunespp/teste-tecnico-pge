@@ -29,6 +29,10 @@ export class ClienteService {
     );
   }
 
+  listarDoCache(): ICliente[] {
+  return Cache.get<ICliente[]>({ key: this.storageKey }) || [];
+}
+
   criar(cliente: ICliente): Observable<ICliente> {
     return this.http.post<ICliente>(this.baseUrl, cliente).pipe(
       tap((novoCliente) => {

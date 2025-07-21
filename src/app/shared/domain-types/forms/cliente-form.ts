@@ -9,6 +9,7 @@ export type ICliente = {
   contato: string;
   tipoContato: string;
   paisEstado: string;
+  cidade?: string;
   pais: string;
   estado: string;
 };
