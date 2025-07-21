@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
-import { ListagemClientesComponent } from './pages/listagem-clientes/listagem-clientes.component';
-import { CadastroClientePageComponent } from './pages/cadastro-cliente-page/cadastro-cliente-page.component';
+import { ListagemClientesComponent } from './pages/clientes/listagem/listagem-clientes.component';
+import { CadastroClientePageComponent } from './pages/clientes/cadastro/cadastro-cliente-page.component';
+;
 
 export const routes: Routes = [
     {

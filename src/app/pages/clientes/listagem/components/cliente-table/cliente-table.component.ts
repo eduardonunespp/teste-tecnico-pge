@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TableModule } from 'primeng/table';
-import { ICliente } from '../../../../shared';
+import { ICliente } from '../../../../../shared';
 import { ButtonModule } from 'primeng/button';
 
 @Component({

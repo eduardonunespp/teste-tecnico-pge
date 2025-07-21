@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ICliente } from '../../shared';
+import { ICliente } from '../../../shared';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { delay } from 'rxjs/operators';
-import * as Cache from '../../core/adapters/cache';
+import * as Cache from '../../../core/adapters/cache';
 
 @Injectable({
   providedIn: 'root',

@@ -22,13 +22,14 @@ import { CalendarModule } from 'primeng/calendar';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { format } from 'date-fns';
 import { CommonModule } from '@angular/common';
-import { IClienteForm } from '../../../../shared';
-import { dataFuturaValidator } from '../../../../core';
+import { IClienteForm } from '../../../../../shared';
+import { dataFuturaValidator } from '../../../../../core';
 import { Button, ButtonModule } from 'primeng/button';
-import { ClienteService } from '../../../../core/services/cliente.service';
+
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { LogService } from '../../../../core/services/log.service';
+import { LogService } from '../../../../../core/services/log.service';
+import { ClienteService } from '../../../services/cliente.service';
 
 @Component({
   selector: 'app-cliente-form',
