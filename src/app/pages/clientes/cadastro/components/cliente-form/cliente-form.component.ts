@@ -68,6 +68,7 @@ export class ClienteFormComponent implements OnInit, OnChanges {
   msg: ImsgError = msg;
   isLoading: boolean = false;
 
+  // Estados por País, Mockados para demonstração
   estadosPorPais: Record<string, string[]> = {
     Brasil: [
       'SP',
