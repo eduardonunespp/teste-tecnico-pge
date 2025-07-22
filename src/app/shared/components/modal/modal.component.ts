@@ -8,7 +8,7 @@ import { DialogModule } from 'primeng/dialog';
   standalone: true,
   imports: [CommonModule, DialogModule, ButtonModule],
   templateUrl: './modal.component.html',
-  styleUrl: './modal.component.scss'
+  styleUrl: './modal.component.scss',
 })
 export class ModalComponent {
   @Input() visible: boolean = false;

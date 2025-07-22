@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-
 import { ButtonModule } from 'primeng/button';
 import { ClienteTableComponent } from './components/cliente-table/cliente-table.component';
 import { ICliente } from '../../../shared';
@@ -84,7 +83,7 @@ export class ListagemClientesComponent implements OnInit {
   getFromCache(): void {
     this.clientes = this.clienteService.listarDoCache();
 
-    const filtro = this.form?.value || {}; // Pega filtros atuais (ou vazio)
+    const filtro = this.form?.value || {};
     const filtrados = this.filtrarClientes(this.clientes, filtro);
     this.clientesSubject.next(filtrados);
   }
@@ -130,11 +129,15 @@ export class ListagemClientesComponent implements OnInit {
       const filtrados = this.filtrarClientes(novaLista, filtros);
       this.clientesSubject.next(filtrados);
     });
+
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Sucesso',
+      detail: 'Cliente deletado com sucesso!',
+    });
   }
 
-  cancelou() {
-    console.log('Cancelado');
-  }
+
 
   showModal: boolean = false;
 

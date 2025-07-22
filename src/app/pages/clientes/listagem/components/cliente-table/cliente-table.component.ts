@@ -14,7 +14,7 @@ import { ButtonModule } from 'primeng/button';
 export class ClienteTableComponent {
   @Input() clientes: ICliente[] = []
 
-  @Output() openModalDelete = new EventEmitter<number>(); // envia o ID
+  @Output() openModalDelete = new EventEmitter<number>();
 
   @Output() openModalEdit = new EventEmitter<number>();
 }

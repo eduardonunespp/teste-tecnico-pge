@@ -22,7 +22,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { format } from 'date-fns';
 import { CommonModule } from '@angular/common';
-import { IClienteForm } from '../../../../../shared';
+import { IClienteForm, ImsgError, msg } from '../../../../../shared';
 import { dataFuturaValidator } from '../../../../../core';
 import { Button, ButtonModule } from 'primeng/button';
 
@@ -61,6 +61,7 @@ export class ClienteFormComponent implements OnInit, OnChanges {
   form!: FormGroup;
   paises = ['Brasil', 'Estados Unidos'];
   estados: string[] = [];
+  msg: ImsgError = msg;
 
   estadosPorPais: Record<string, string[]> = {
     Brasil: [

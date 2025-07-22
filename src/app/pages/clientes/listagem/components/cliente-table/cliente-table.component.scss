@@ -6,7 +6,7 @@ tr, th {
 ::ng-deep .tabela-com-borda .p-datatable-wrapper {
   border: 1px solid #ccc;
   border-radius: 8px;
-  overflow: hidden; // necessário para cortar bordas internas
+  overflow: hidden;
 }
 
 ::ng-deep .tabela-com-borda table {

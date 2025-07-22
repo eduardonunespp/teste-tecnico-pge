@@ -33,7 +33,7 @@
         *ngIf="f.email.invalid && (f.email.touched || f.nome.dirty)"
         class="p-error"
       >
-        Email inválido.
+        {{ msg.email }}
       </small>
     </div>
 
@@ -69,11 +69,11 @@
         <label for="cpf">CPF</label>
       </p-floatlabel>
       <small
-  *ngIf="f.cpf.hasError('required') && (f.cpf.touched || f.cpf.dirty)"
-  class="p-error"
->
-  CPF é obrigatório para residentes no Brasil.
-</small>
+        *ngIf="f.cpf.hasError('required') && (f.cpf.touched || f.cpf.dirty)"
+        class="p-error"
+      >
+        CPF é obrigatório para residentes no Brasil.
+      </small>
     </div>
 
     <div class="col-12 md:col-6">
@@ -97,7 +97,7 @@
         *ngIf="f['dataNascimento'].errors?.['dataFutura'] && (f['dataNascimento'].touched || f['dataNascimento'].dirty)"
         class="p-error"
       >
-        A data não pode ser no futuro.
+        {{ msg.dataFutura }}
       </small>
     </div>
 
@@ -130,7 +130,6 @@
     </div>
   </div>
 
-  
   <div class="footer-form">
     <p-button [disabled]="!form.valid" label="Salvar" (onClick)="submit()" />
   </div>
