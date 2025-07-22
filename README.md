@@ -46,7 +46,7 @@ Bem Vindo!, este é um teste técnico proposto pela PGE (Procuradoria Geral do E
 
 <hr>
 
-O Objetivo deste projeto foi realizar o teste técnico proposto pela PGE.
+O objetivo deste projeto foi atender ao teste técnico proposto pela PGE, aplicando os princípios da Arquitetura Limpa e implementando testes unitários para garantir a qualidade e a manutenibilidade do código.
 
 O projeto está disponível em: <strong><a href="https://teste-tecnico-pge.vercel.app">Cadastro de Clientes</a></strong> 🚀
 
