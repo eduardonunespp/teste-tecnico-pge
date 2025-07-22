@@ -3,7 +3,7 @@
 
 <img width="1867" height="922" alt="Image" src="https://github.com/user-attachments/assets/6a0ba113-6eeb-4d50-b0cf-b1724461b0e6" />
 
-<div></div>
+<h1></h1>
 
 <img width="1874" height="927" alt="Image" src="https://github.com/user-attachments/assets/5052a4bc-5d9d-493c-b20a-756d5805217f" />
 
@@ -12,7 +12,7 @@
 <hr>
 
 <div>
- <h1>Teste Técnico PGE</h1>
+ <h1>Teste Técnico PGE - CE</h1>
  
 Bem Vindo!, este é um teste técnico proposto pela PGE (Procuradoria Geral do Estado - CE), trata se de um cadastro de clientes, onde os dados são persistidos localmente.
  
@@ -46,7 +46,7 @@ Bem Vindo!, este é um teste técnico proposto pela PGE (Procuradoria Geral do E
 
 O Objetivo deste projeto foi realizar o teste técnico proposto pela PGE.
 
-O projeto está disponível em: <strong><a href="https://teste-tecnico-pge.vercel.app">todo-list-legan</a></strong> 🚀
+O projeto está disponível em: <strong><a href="https://teste-tecnico-pge.vercel.app">Cadastro de Clientes</a></strong> 🚀
 
 # TesteTecnicoPge
 
