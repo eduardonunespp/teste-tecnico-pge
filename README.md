@@ -38,7 +38,7 @@ Bem Vindo!, este é um teste técnico proposto pela PGE (Procuradoria Geral do E
   - Edicao de cliente
   - Deleção de cliente
  
- <h2>Como usar</h2>
+ <h2>Como utilizar</h2>
  
   - Clone este repositório para sua máquina local ou faça o download do código-fonte
   - instale as dependências e rode o projeto com ng serve
