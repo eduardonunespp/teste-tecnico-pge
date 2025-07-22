@@ -131,6 +131,12 @@
   </div>
 
   <div class="footer-form">
-    <p-button [disabled]="!form.valid" label="Salvar" (onClick)="submit()" />
-  </div>
+  <p-button
+    [disabled]="!form.valid || isLoading"
+    [label]="isLoading ? '' : 'Salvar'"
+    [icon]="isLoading ? 'pi pi-spinner pi-spin' : ''"
+    (onClick)="submit()"
+  />
+</div>
+
 </form>

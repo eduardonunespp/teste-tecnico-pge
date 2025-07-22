@@ -37,3 +37,8 @@ p-button {
 small {
   color: rgb(255, 68, 0);
 }
+
+::ng-deep p-progress-spinner circle {
+  stroke: #007bff; /* cor azul, substitua pela sua */
+}
+

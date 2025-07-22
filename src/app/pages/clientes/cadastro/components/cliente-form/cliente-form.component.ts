@@ -22,6 +22,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { format } from 'date-fns';
 import { CommonModule } from '@angular/common';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { Button, ButtonModule } from 'primeng/button';
 
@@ -49,6 +50,7 @@ import { dataFuturaValidator } from '@core/validators';
     CommonModule,
     Button,
     ToastModule,
+    ProgressSpinnerModule
   ],
   providers: [provideNgxMask(), MessageService],
   templateUrl: './cliente-form.component.html',
@@ -64,6 +66,7 @@ export class ClienteFormComponent implements OnInit, OnChanges {
   paises = ['Brasil', 'Estados Unidos'];
   estados: string[] = [];
   msg: ImsgError = msg;
+  isLoading: boolean = false;
 
   estadosPorPais: Record<string, string[]> = {
     Brasil: [
@@ -154,9 +157,10 @@ export class ClienteFormComponent implements OnInit, OnChanges {
     }
 
     const cliente = this.form.value;
-
+    this.isLoading = true;
     if (this.idCliente) {
       // Atualização
+
       this.clienteService.atualizar(this.idCliente, cliente).subscribe({
         next: (clienteAtualizado) => {
           this.logService.logInfo(
@@ -167,6 +171,7 @@ export class ClienteFormComponent implements OnInit, OnChanges {
           this.onCloseModal.emit();
           this.onRefreshClients.emit();
           this.onEditSuccess.emit();
+          this.isLoading = false;
         },
         error: (error) => {
           this.logService.logError('Erro ao atualizar cliente', error);
@@ -175,6 +180,7 @@ export class ClienteFormComponent implements OnInit, OnChanges {
             summary: 'Erro',
             detail: 'Falha ao atualizar cliente.',
           });
+          this.isLoading = false;
         },
       });
     } else {
@@ -188,6 +194,7 @@ export class ClienteFormComponent implements OnInit, OnChanges {
             detail: 'Cliente salvo com sucesso!',
           });
           this.form.reset();
+          this.isLoading = false;
         },
         error: (error) => {
           this.logService.logError('Erro ao criar cliente', error);
@@ -196,6 +203,7 @@ export class ClienteFormComponent implements OnInit, OnChanges {
             summary: 'Erro',
             detail: 'Falha ao salvar cliente.',
           });
+          this.isLoading = false;
         },
       });
     }
