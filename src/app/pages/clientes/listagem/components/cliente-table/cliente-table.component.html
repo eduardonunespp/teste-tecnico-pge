@@ -24,7 +24,7 @@
     <tr>
       <td>{{ cliente.nome }}</td>
       <td>{{ cliente.email }}</td>
-      <td>{{ cliente.cpf }}</td>
+      <td>{{ cliente.cpf ? cliente.cpf : '...' }}</td>
       <td>{{ cliente.dataNascimento }}</td>
       <td>{{ cliente.tipoContato }}</td>
       <td>{{ cliente.contato }}</td>
