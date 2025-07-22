@@ -1,3 +1,53 @@
+
+<h1></h1>
+ 
+![image](https://github.com/user-attachments/assets/c79e121d-ebbb-4128-8a5b-f875ac76cdea)
+
+![image](https://github.com/user-attachments/assets/ca0b4f50-12fc-4319-9e52-9517d0a65a80)
+
+![image](https://github.com/user-attachments/assets/d66b0710-fec3-4a1c-b9f0-7cb056fbb495)
+
+<h1></h1>
+
+<hr>
+
+<div>
+ <h1>Teste Técnico PGE</h1>
+ 
+Bem Vindo!, este é um teste técnico proposto pela PGE (Procuradoria Geral do Estado - CE), trata se de um cadastro de clientes, onde os dados são persistidos localmente.
+ 
+ <h2>Tecnologias Utilizadas:</h2>
+ 
+ <div>
+   <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" />
+ </div>
+  <div>
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
+ </div>
+ <div>
+   <img src="https://img.shields.io/badge/Jasmine-8A4182?style=for-the-badge&logo=jasmine&logoColor=white" />
+ </div>
+
+ 
+ <h2>Funcionalidades</h2>
+  
+  - Adicona um cliente
+  - Listagem de clientes
+  - Edicao de cliente
+  - Deleção de cliente
+ 
+ <h2>Como usar</h2>
+ 
+  - Clone este repositório para sua máquina local ou faça o download do código-fonte
+  - instale as dependências e rode o projeto com ng serve
+</div>
+
+<hr>
+
+O Objetivo deste projeto foi realizar o teste técnico proposto pela PGE.
+
+O projeto está disponível em: <strong><a href="https://teste-tecnico-pge.vercel.app">todo-list-legan</a></strong> 🚀
+
 # TesteTecnicoPge
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.19.
