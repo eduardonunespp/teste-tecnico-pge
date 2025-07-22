@@ -1,24 +1,24 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { ClienteTableComponent } from './components/cliente-table/cliente-table.component';
-import { ICliente } from '../../../shared';
-import { ModalComponent } from '../../../shared/components/modal/modal.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { Router } from '@angular/router';
-import { DescriptionHeaderPageComponent } from '../../../shared/components/description-header-page/description-header-page.component';
 import { BehaviorSubject } from 'rxjs';
-
 import { CommonModule } from '@angular/common';
-import * as Cache from '../../../core/adapters/cache';
 import { FloatLabel, FloatLabelModule } from 'primeng/floatlabel';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { PopupComponent } from '../../../shared/components/popup/popup.component';
+
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { ClienteService } from '../services/cliente.service';
+import { PopupComponent } from '@shared/components/popup/popup.component';
+import { DescriptionHeaderPageComponent } from '@shared/components/description-header-page/description-header-page.component';
+import { ClienteTableComponent } from './components/cliente-table/cliente-table.component';
+import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ClienteFormComponent } from '../cadastro/components/cliente-form/cliente-form.component';
+import { ICliente } from '@shared/domain-types';
+import { ClienteService } from '../services/cliente.service';
+import * as Cache from '@core/adapters';
 
 @Component({
   selector: 'app-listagem-clientes',
@@ -136,8 +136,6 @@ export class ListagemClientesComponent implements OnInit {
       detail: 'Cliente deletado com sucesso!',
     });
   }
-
-
 
   showModal: boolean = false;
 

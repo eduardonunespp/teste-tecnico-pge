@@ -5,9 +5,10 @@ import {
   HttpHandlerFn,
   HttpResponse,
 } from '@angular/common/http';
+import { ICliente } from '@shared/domain-types';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { ICliente } from '../../shared';
+
 
 const clientes: ICliente[] = [];
 
