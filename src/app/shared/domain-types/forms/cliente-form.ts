@@ -8,7 +8,7 @@ export type ICliente = {
   dataNascimento: string; // ou Date, dependendo do formato que você usa
   contato: string;
   tipoContato: string;
-  paisEstado: string;
+  paisEstado?: string;
   cidade?: string;
   pais: string;
   estado: string;

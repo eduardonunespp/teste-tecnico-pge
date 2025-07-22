@@ -3,14 +3,12 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0px 20px;
+  padding: 0 20px;
 
   .container-table {
     width: 100%;
     display: flex;
     flex-direction: column;
-
-    padding: 100px 20px;
     border-radius: 8px;
 
     .table-container {
@@ -26,11 +24,11 @@ main {
   }
 
   @media (min-width: 600px) {
-    padding: 0px 40px;
+    padding: 0 40px;
   }
 
   @media (min-width: 900px) {
-    padding: 0px 100px;
+    padding: 0 100px;
 
     .container-table {
       .table-container {
@@ -40,10 +38,6 @@ main {
   }
 
   @media (min-width: 1200px) {
-    padding: 0px 300px;
+    padding: 0 300px;
   }
 }
-
-
-
-
